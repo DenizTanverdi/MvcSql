@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        
+        <div class="row">
+            <div class=" col-md-12">
+                <h2>Ajax ile Dosya Yükleme</h2>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="file" id="file" class="form-control"  accept="audio/*"/>
+                <input type="button" name="btnSendFile" id="btnSendFile" value="Send File"/>
+            }
+
+
+                <script>
+
+                    $('#btnSendFile').click(function () {
+                        var formdata = new FormData($("form").get(0));
+
+                        $.ajax({
+                            method: "POST",
+                            url: '@Url.Action("FileUpload","Home")',
+                            data: formdata,
+                            processData: false,
+                            contentType: false
+                        }).done(function (result) {
+
+                            console.log(result);
+                            if (result.hasError == false) {
+                                alert(result.message);
+                            }
+                            else {
+                                alert("Dosya Null ...");
+                            }
+                        });
+                   })
+
+                </script>
+        </div>
+    </div>
+</body>
+</html>

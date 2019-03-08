@@ -1,0 +1,63 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "rapor";
+}
+
+<h2>rapor</h2>
+@{ 
+
+    DataTable table = ViewBag.Rapor as DataTable;
+
+}
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>----</th>
+
+        <th colspan="2" style="text-align:center">Ocak</th>
+        <th colspan="2" style="text-align:center">Şubat</th>
+        <th colspan="2" style="text-align:center">Mart</th>
+        <th colspan="2" style="text-align:center">Nisan</th>
+        <th colspan="2" style="text-align:center">Mayıs</th>
+        <th colspan="2" style="text-align:center">Haziran</th>
+        <th colspan="2" style="text-align:center">Temmuz</th>
+        <th colspan="2" style="text-align:center">Ağustos</th>
+        <th colspan="2" style="text-align:center">Eylül</th>
+        <th colspan="2" style="text-align:center">Ekim</th>
+        <th colspan="2" style="text-align:center">Kasım</th>
+        <th colspan="2" style="text-align:center">Aralık</th>
+
+    </tr>
+    <tr>
+       
+        @for (int i = 0; i < table.Columns.Count; i++)
+        {
+            <th>@table.Columns[i].Caption</th>
+
+        }
+
+    </tr>
+
+
+   @for (int i = 0; i < table.Rows.Count; i++)
+   {
+
+    <tr>
+        @for (int j = 0; j < table.Columns.Count; j++)
+        {
+            if (@table.Rows[i][j].ToString()=="0")
+            {
+                <td style="background-color:brown">@table.Rows[i][j].ToString()</td>
+            }
+            else
+            {
+                <td>@table.Rows[i][j].ToString()</td>}
+
+
+        }
+
+
+    </tr>
+    }
+
+</table>
+
